@@ -1,7 +1,19 @@
+import os
+
 from setuptools import find_packages, setup
 import sys
 import ast
 import re
+
+
+def package_files(directory, ext):
+    paths = []
+    for (path, directories, filenames) in os.walk(directory):
+        for filename in filenames:
+            if filename.endswith(ext):
+                paths.append(os.path.join('..', path, filename))
+    return paths
+
 
 _version_re = re.compile(r"__version__\s+=\s+(.*)")
 
@@ -60,6 +72,11 @@ setup(
     rest_framework_require=rest_framework_require,
     extras_require={"test": tests_require, "rest_framework": rest_framework_require},
     include_package_data=True,
+    package_data={
+        '': [
+            *package_files('graphene-django', '.js'),
+        ],
+    },
     zip_safe=False,
     platforms="any",
 )
