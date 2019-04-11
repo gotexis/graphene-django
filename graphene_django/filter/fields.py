@@ -59,19 +59,19 @@ class DjangoFilterConnectionField(DjangoConnectionField):
 
         # See related PR: https://github.com/graphql-python/graphene-django/pull/126
 
-        assert not (
-            default_queryset.query.low_mark and queryset.query.low_mark
-        ), "Received two sliced querysets (low mark) in the connection, please slice only in one."
-        assert not (
-            default_queryset.query.high_mark and queryset.query.high_mark
-        ), "Received two sliced querysets (high mark) in the connection, please slice only in one."
-        low = default_queryset.query.low_mark or queryset.query.low_mark
-        high = default_queryset.query.high_mark or queryset.query.high_mark
-        default_queryset.query.clear_limits()
+        # assert not (
+        #     default_queryset.query.low_mark and queryset.query.low_mark
+        # ), "Received two sliced querysets (low mark) in the connection, please slice only in one."
+        # assert not (
+        #     default_queryset.query.high_mark and queryset.query.high_mark
+        # ), "Received two sliced querysets (high mark) in the connection, please slice only in one."
+        # low = default_queryset.query.low_mark or queryset.query.low_mark
+        # high = default_queryset.query.high_mark or queryset.query.high_mark
+        # default_queryset.query.clear_limits()
         queryset = super(DjangoFilterConnectionField, cls).merge_querysets(
             default_queryset, queryset
         )
-        queryset.query.set_limits(low, high)
+        # queryset.query.set_limits(low, high)
         return queryset
 
     @classmethod
