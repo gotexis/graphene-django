@@ -74,7 +74,7 @@ setup(
     include_package_data=True,
     package_data={
         '': [
-            *package_files('graphene-django', '.js'),
+            *package_files('graphene_django', '.js'),
         ],
     },
     zip_safe=False,
